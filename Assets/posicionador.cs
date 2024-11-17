@@ -22,6 +22,12 @@ public class Posicionador : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // Si apretem ESC tanca l'aplicació TODO canvas amb menu
+            Application.Quit();
+
+        }
         if (Input.GetMouseButtonDown(0))
         {
             objetivo = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -75,5 +81,5 @@ public class Posicionador : MonoBehaviour
         Debug.Log("targetPosition final: " + objetivo);
         door = true;
         currentDoor = doorController; // Asigna la referencia de la porta
-    }
+    } 
 }
