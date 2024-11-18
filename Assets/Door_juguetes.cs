@@ -1,96 +1,106 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;  // Per canviar escenes
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
 
 public class DoorController : MonoBehaviour
 {
-    public Sprite closedDoorSprite; 
-    public Sprite openDoorSprite;   
+    public Sprite closedDoorSprite;
+    public Sprite openDoorSprite;
 
-    public AudioClip openDoorSound; // revisar audio ja que no va
+    public AudioClip openDoorSound;
     public AudioClip closeDoorSound;
 
-    // Estat porta
-    private bool isDoorOpen = false; // Indica si la porta esta oberta/tancada
+    public bool needs_key = false; // Indica si es necesita una clau
 
-    // Distancia d'interaccio
-    public float interactionDistance; // Distancia per iteracturar amb la porta
+    private bool isDoorOpen = false; // Estat de la porta
+
+    public float interactionDistance = 2f; // Distancia per interactuar
 
     private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
     private GameObject player;
-    private Posicionador playerMovement;  // Referencia al script de moviment
+    private Posicionador playerMovement;
 
-    private Vector3 targetPosition;  // Posicio a la que s'ha de moure el player
+    private Vector3 targetPosition;
+
+
+    public Canvas worldSpaceCanvas; // Canvas a World Space
+    public Text messageText;
+
+    public string keyNeededMessage = "Necesito una llave";
+    public string targetSceneName = ""; // Nom de l'escena a carregar
 
     private void Start()
     {
-        // Components necesaris
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
 
-        // Configurar sprite inicial com porta tancada
         spriteRenderer.sprite = closedDoorSprite;
 
-        // Obtenir el objecte del jugador
         player = GameObject.FindGameObjectWithTag("Player");
-
-        // Obtenir el script de moviment del jugador
         playerMovement = player.GetComponent<Posicionador>();
+
+        // Amaga canvas inicialment
+        worldSpaceCanvas.enabled = false;
     }
 
     private void Update()
     {
-        // Clic dret del mouse
+        // Clic dret per obrir / tancar porta
         if (Input.GetMouseButtonDown(1))
         {
-            // Comproba si el jugador esta aprop de la porta cuan fa clic dret
             if (Vector2.Distance(player.transform.position, transform.position) <= interactionDistance)
             {
-                ToggleDoor();  // Si esta aprop obra / tanca directament
+                ToggleDoor(); // Si esta aprop, obre o tanca porta
             }
             else
-                // Nomes es moura si el click esta prop de la porta
-                if (Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.position) <= interactionDistance)
             {
-                // Si esta lluny es moura cap a la porta
-                targetPosition = transform.position;
-                Debug.Log("targetPosition crida: " + targetPosition);
-                playerMovement.SetTargetPosition(targetPosition, this);  // Mou el player
+                // Si esta lluny, es mou cap a la porta
+                if (Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.position) <= interactionDistance)
+                {
+                    targetPosition = transform.position;
+                    playerMovement.SetTargetPosition(targetPosition, this);
+                }
             }
         }
-        // Clic esquerra
+
+        // Clic esquerra per interactuar amb la porta (entra si esta oberta)
         if (Input.GetMouseButtonDown(0))
         {
-            // Si la porta esta oberta i fa click esquerra
             if (isDoorOpen && Vector2.Distance(player.transform.position, transform.position) <= interactionDistance)
             {
-                // utilitcem un Raycast per veure si el click es sobre la porta
+                // Raycast per veure si el click es sobre la porta
                 RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
                 if (hit.collider != null && hit.collider.gameObject == gameObject)
                 {
-                    // Camvia l'escena
-                    SceneManager.LoadScene("Sala_juguetes");
+                    // Canvi escena
+                    SceneManager.LoadScene(targetSceneName);
                 }
-                    
             }
         }
     }
 
     public void ToggleDoor()
     {
-        // Cambia estat porta
-        isDoorOpen = !isDoorOpen;
-
-        // Actualiza el sprite segon el estat de la porta i fa soroll
-        if (isDoorOpen)
+        if (!needs_key)
         {
-            spriteRenderer.sprite = openDoorSprite;
-            PlaySound(openDoorSound);
+            isDoorOpen = !isDoorOpen; // Canviar estat porta
+
+            if (isDoorOpen)
+            {
+                spriteRenderer.sprite = openDoorSprite;
+                PlaySound(openDoorSound);
+            }
+            else
+            {
+                spriteRenderer.sprite = closedDoorSprite;
+                PlaySound(closeDoorSound);
+            }
         }
         else
         {
-            spriteRenderer.sprite = closedDoorSprite;
-            PlaySound(closeDoorSound);
+            ShowMessage(keyNeededMessage);
         }
     }
 
@@ -98,7 +108,24 @@ public class DoorController : MonoBehaviour
     {
         if (clip != null && audioSource != null)
         {
-            audioSource.PlayOneShot(clip); // Reprodueix el so una vegada
+            audioSource.PlayOneShot(clip);
         }
     }
+
+
+    private void ShowMessage(string message)
+    {
+        worldSpaceCanvas.enabled = true;
+        messageText.text = message;
+
+        // Misatge desapareix despres de 4 segons
+        StartCoroutine(HideMessageAfterDelay(4f));
+    }
+
+    private IEnumerator HideMessageAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        worldSpaceCanvas.enabled = false; // Ocultar el Canvas
+    }
 }
+
