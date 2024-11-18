@@ -64,8 +64,14 @@ public class DoorController : MonoBehaviour
             // Si la porta esta oberta i fa click esquerra
             if (isDoorOpen && Vector2.Distance(player.transform.position, transform.position) <= interactionDistance)
             {
-                // Camvia l'escena
-                SceneManager.LoadScene("Sala_juguetes");
+                // utilitcem un Raycast per veure si el click es sobre la porta
+                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+                if (hit.collider != null && hit.collider.gameObject == gameObject)
+                {
+                    // Camvia l'escena
+                    SceneManager.LoadScene("Sala_juguetes");
+                }
+                    
             }
         }
     }
