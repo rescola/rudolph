@@ -13,7 +13,7 @@ public class DoorController : MonoBehaviour
 
     public bool needs_key = false; // Indica si es necesita una clau
 
-    private bool isDoorOpen = false; // Estat de la porta
+    public bool isDoorOpen = false; // Estat de la porta
 
     public float interactionDistance = 2f; // Distancia per interactuar
 
