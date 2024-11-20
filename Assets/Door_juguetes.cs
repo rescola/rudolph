@@ -36,7 +36,14 @@ public class DoorController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
 
-        spriteRenderer.sprite = closedDoorSprite;
+        if(isDoorOpen)
+        {
+            spriteRenderer.sprite = openDoorSprite;
+        }
+        else
+        {
+            spriteRenderer.sprite = closedDoorSprite;
+        }
 
         player = GameObject.FindGameObjectWithTag("Player");
         playerMovement = player.GetComponent<Posicionador>();
