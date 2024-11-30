@@ -863,6 +863,7 @@ MonoBehaviour:
   velocidad: 1
   maxY: -0.09
   distancia: 0.1
+  canvas: {fileID: 867106681}
 --- !u!50 &940226714
 Rigidbody2D:
   serializedVersion: 4
@@ -1066,7 +1067,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000000059605, y: -0.000000044703}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 638.614, y: 173.57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1326690875
