@@ -13,6 +13,7 @@ public class Posicionador : MonoBehaviour
     public float maxY; // Limit de les Y (això soluciona problemes si jugador marca una paret)
     public float distancia; //Distancia entre personatge y punt marcat
 
+    public GameObject canvas;
 
     void Start()
     {
@@ -50,12 +51,18 @@ public class Posicionador : MonoBehaviour
             // Direcció del personatge
             if (objetivo.x > transform.position.x)
             {
+                FixCanvasOrientation();
                 transform.localScale = new Vector3(1, 1, 1); // Mou a la dreta
+                FixCanvasOrientation2();
             }
             else
             {
+                FixCanvasOrientation2();
                 transform.localScale = new Vector3(-1, 1, 1); // Mou a l'esquerra
+                FixCanvasOrientation();
+
             }
+
         }
         else
         {
@@ -67,6 +74,27 @@ public class Posicionador : MonoBehaviour
                 currentDoor = null; // reseteja la referencia
             }
         }
+    }
+
+    // Metode per asegurar que el canvas sempre miri a la dreta (es pugui llegir)
+    void FixCanvasOrientation()
+    {
+            canvas.transform.rotation = Quaternion.identity;
+
+            Vector3 canvasScale = canvas.transform.localScale;
+            canvasScale.x = -canvasScale.x;
+            canvas.transform.localScale = canvasScale;
+            //canvas.transform.localScale = new Vector3(-1, 1, 1);
+    }
+
+    void FixCanvasOrientation2()
+    {
+        canvas.transform.rotation = Quaternion.identity;
+
+        Vector3 canvasScale = canvas.transform.localScale;
+        canvasScale.x = Mathf.Abs(canvasScale.x);
+        canvas.transform.localScale = canvasScale;
+        //canvas.transform.localScale = new Vector3(-1, 1, 1);
     }
 
     // Mètode públic per canviar l'objectiu de moviment (utilitzat en DoorController)
