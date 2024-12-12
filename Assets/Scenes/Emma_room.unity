@@ -763,7 +763,7 @@ Transform:
   m_GameObject: {fileID: 352740437}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.718, y: -0.2, z: 0}
+  m_LocalPosition: {x: 0.988, y: -0.161, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -862,6 +862,8 @@ GameObject:
   - component: {fileID: 587306998}
   - component: {fileID: 587306997}
   - component: {fileID: 587306996}
+  - component: {fileID: 587307002}
+  - component: {fileID: 587307001}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1006,6 +1008,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &587307001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587306995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 619f657e6ec9b454c97d0a2a4af2a188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueText: {fileID: 469420453}
+  messageToDisplay: "Mi madre me dej\xF3 una carta peculiar en las estanterias, deber\xEDa
+    cogerla (click derecho)"
+  displayDuration: 7
+--- !u!114 &587307002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587306995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621d81a26fb30477eab0ed2519c5090b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageToDisplay: 
 --- !u!1 &601567141
 GameObject:
   m_ObjectHideFlags: 0
