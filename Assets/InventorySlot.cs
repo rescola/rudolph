@@ -3,43 +3,43 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    // Imagen del ícono del slot
+
     public Image icon;
 
-    // Objeto actualmente en el slot
+    // Objecte actual a l'slot
     private InventoryItem currentItem;
 
-    // Método para agregar elementos al slot
+    // Metode per agregar elements
     public void AddItem(InventoryItem item)
     {
         if (item == null)
         {
-            Debug.LogWarning("Intentando agregar un objeto nulo al slot.");
+            Debug.LogWarning("Intenta afegir un objecte nul al slot");
             return;
         }
 
-        currentItem = item; // Guardar objeto
-        icon.sprite = item.icon; // Actualizar el ícono
+        currentItem = item;
+        icon.sprite = item.icon;
         icon.color = Color.white; // Sembla que si no es negre no pinta
-        icon.enabled = true; // Mostrar el ícono
+        icon.enabled = true; // Mostrar l'icono
     }
 
-    // Método para limpiar el slot
+    // Metode per netejar l'slot (TODO)
     public void ClearSlot()
     {
-        currentItem = null; // Eliminar la referencia al objeto
-        icon.sprite = null; // Eliminar el ícono
-        icon.enabled = false; // Ocultar el ícono
-        GetComponent<Image>().color = Color.black;
+        currentItem = null; 
+        icon.sprite = null; 
+        icon.enabled = false;
+        GetComponent<Image>().color = Color.black; // torna a posar negre
     }
 
-    // Método llamado al hacer clic en el slot
+    // Metode al fer click en l'slot
     public void OnSlotClicked()
     {
         if (currentItem != null)
         {
             Debug.Log($"Has seleccionado: {currentItem.name}");
-            // TODO: Implementar algo que hacer con el objeto seleccionado
+            // TODO: Aqui implementar que fer amb l'element seleccionat
         }
         else
         {
@@ -47,7 +47,7 @@ public class InventorySlot : MonoBehaviour
         }
     }
 
-    // Método para verificar si el slot está vacío
+    // Metode per veure si esta buit el slot
     public bool IsEmpty()
     {
         return currentItem == null;
@@ -55,6 +55,6 @@ public class InventorySlot : MonoBehaviour
 
     public InventoryItem GetItem()
     {
-        return currentItem; // Devuelve el objeto actual en el slot
+        return currentItem; // Retorna l'objecte actual de l'slot
     }
 }

@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class SceneDialogue : MonoBehaviour
 {
-    public Text dialogueText; // Referencia al componente de texto en la UI
+    public Text dialogueText; // Referencia al component de text a la UI
     public string messageToDisplay;
-    public float displayDuration = 5f; // Duración del mensaje en pantalla
+    public float displayDuration = 5f; // Duració del missatge a la pantalla
 
     private void Start()
     {
@@ -16,8 +16,8 @@ public class SceneDialogue : MonoBehaviour
     {
         if (dialogueText != null)
         {
-            dialogueText.text = message; // Mostrar el mensaje en la UI
-            Invoke("ClearMessage", displayDuration); // Borrar el mensaje después del tiempo especificado
+            dialogueText.text = message; // Mostrar el misatge a la UI
+            Invoke("ClearMessage", displayDuration); // Borra el misatge després del temps asignat
         }
         else
         {
@@ -29,7 +29,7 @@ public class SceneDialogue : MonoBehaviour
     {
         if (dialogueText != null)
         {
-            dialogueText.text = ""; // Limpiar el texto
+            dialogueText.text = ""; // Neteja el text
         }
     }
 }

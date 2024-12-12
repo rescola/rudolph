@@ -22,21 +22,21 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItemToInventory(InventoryItem item)
     {
-        // Verifica si el ítem ya está en el inventario
+        // Mira si esta ja a l'inventari l'objecte
         foreach (InventorySlot slot in slots)
         {
-            if (!slot.IsEmpty() && slot.GetItem() == item) // Compara con el objeto existente
+            if (!slot.IsEmpty() && slot.GetItem() == item) // compara amb l'existent
             {
                 Debug.Log($"Ya no hay nada más aquí");
-                return; // No añade duplicados
+                return;
             }
         }
-        // Busca un slot vacío
+        // Itera slots per trobar un lliure
         foreach (InventorySlot slot in slots)
         {
             if (slot.IsEmpty())
             {
-                slot.AddItem(item); // Añade el objeto al slot
+                slot.AddItem(item); // Afageix a l'slot lliure
                 Debug.Log($"Item {item.itemName} añadido al inventario.");
                 return;
             }
