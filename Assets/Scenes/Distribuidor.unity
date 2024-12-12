@@ -1182,7 +1182,7 @@ SpriteRenderer:
   m_Size: {x: 0.56, y: 0.94}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1357973268
@@ -1212,8 +1212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b109e33afc1b4730b7fa29e292b5da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closedDoorSprite: {fileID: 979069681, guid: 443fff58f85f643c69119ace64164c62, type: 3}
-  openDoorSprite: {fileID: -769992774, guid: 443fff58f85f643c69119ace64164c62, type: 3}
+  closedDoorSprite: {fileID: 300386146, guid: 443fff58f85f643c69119ace64164c62, type: 3}
+  openDoorSprite: {fileID: -1044428917, guid: 443fff58f85f643c69119ace64164c62, type: 3}
   openDoorSound: {fileID: 8300000, guid: e1269f3782f93498b9ac0c8c39f19fbf, type: 3}
   closeDoorSound: {fileID: 8300000, guid: e1269f3782f93498b9ac0c8c39f19fbf, type: 3}
   needs_key: 0
@@ -1377,6 +1377,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: Puerta
+  itemToAdd: {fileID: 0}
+  interactionMessage: 
 --- !u!1 &1688175604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1593,6 +1595,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: Puerta
+  itemToAdd: {fileID: 0}
+  interactionMessage: 
 --- !u!82 &1993922910
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1701,8 +1705,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b109e33afc1b4730b7fa29e292b5da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closedDoorSprite: {fileID: 979069681, guid: 443fff58f85f643c69119ace64164c62, type: 3}
-  openDoorSprite: {fileID: -769992774, guid: 443fff58f85f643c69119ace64164c62, type: 3}
+  closedDoorSprite: {fileID: 300386146, guid: 443fff58f85f643c69119ace64164c62, type: 3}
+  openDoorSprite: {fileID: -1044428917, guid: 443fff58f85f643c69119ace64164c62, type: 3}
   openDoorSound: {fileID: 8300000, guid: e1269f3782f93498b9ac0c8c39f19fbf, type: 3}
   closeDoorSound: {fileID: 8300000, guid: e1269f3782f93498b9ac0c8c39f19fbf, type: 3}
   needs_key: 1
@@ -1806,7 +1810,7 @@ SpriteRenderer:
   m_Size: {x: 0.56, y: 0.94}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1993922914
