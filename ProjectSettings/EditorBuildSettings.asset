@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu Inicial.unity
     guid: a25a8ba4a7a2e4849b4af65ba9808b9a
   - enabled: 1
+    path: Assets/Scenes/Emma_room.unity
+    guid: 37993e57c5bc546ad90fe4a0fb2a9391
+  - enabled: 1
     path: Assets/Scenes/Distribuidor.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
