@@ -122,11 +122,12 @@ public class DoorController : MonoBehaviour
 
     private void ShowMessage(string message)
     {
-        worldSpaceCanvas.enabled = true;
-        messageText.text = message;
+        //worldSpaceCanvas.enabled = true;
+        //messageText.text = message;
 
         // Misatge desapareix despres de 4 segons
-        StartCoroutine(HideMessageAfterDelay(4f));
+        //StartCoroutine(HideMessageAfterDelay(4f));
+        MessageManager.Instance.ShowMessage(message, 4f);
     }
 
     private IEnumerator HideMessageAfterDelay(float delay)

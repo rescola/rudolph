@@ -9,7 +9,7 @@ public class SceneDialogue : MonoBehaviour
 
     private void Start()
     {
-        ShowMessage(messageToDisplay);
+        MessageManager.Instance.ShowMessage(messageToDisplay, displayDuration);
     }
 
     private void ShowMessage(string message)
