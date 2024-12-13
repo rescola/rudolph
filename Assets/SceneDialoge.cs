@@ -21,7 +21,7 @@ public class SceneDialogue : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("El componente de texto no está asignado.");
+            Debug.LogWarning("El component de text no està asignat.");
         }
     }
 

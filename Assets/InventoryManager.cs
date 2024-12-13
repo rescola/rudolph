@@ -27,7 +27,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (!slot.IsEmpty() && slot.GetItem() == item) // compara amb l'existent
             {
-                Debug.Log($"Ya no hay nada más aquí");
+                Debug.Log($"Ja no hi ha res més aquí");
                 return;
             }
         }
@@ -37,11 +37,11 @@ public class InventoryManager : MonoBehaviour
             if (slot.IsEmpty())
             {
                 slot.AddItem(item); // Afageix a l'slot lliure
-                Debug.Log($"Item {item.itemName} añadido al inventario.");
+                Debug.Log($"Item {item.itemName} afegit al inventari.");
                 return;
             }
         }
 
-        Debug.LogWarning("No hay espacio en el inventario!");
+        Debug.LogWarning("No hi ha espai a l'inventari!");
     }
 }

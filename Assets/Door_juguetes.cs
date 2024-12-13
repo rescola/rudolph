@@ -8,6 +8,8 @@ public class DoorController : MonoBehaviour
     public Sprite closedDoorSprite;
     public Sprite openDoorSprite;
 
+    public string DoorID; //indentificador unic per persistencia de l'estat obert/tancat
+
     public AudioClip openDoorSound;
     public AudioClip closeDoorSound;
 
@@ -34,9 +36,17 @@ public class DoorController : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            Debug.LogError($"DoorController: No s'ha trobat un SpriteRenderer en {gameObject.name}");
+        }
         audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.LogError($"DoorController: No s'ha trobat un AudioSource en {gameObject.name}");
+        }
 
-        if(isDoorOpen)
+        if (isDoorOpen)
         {
             spriteRenderer.sprite = openDoorSprite;
         }
@@ -46,10 +56,40 @@ public class DoorController : MonoBehaviour
         }
 
         player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            Debug.LogError("DoorController: No s'ha trobat un GameObject amb la etiqueta 'Player'");
+        }
         playerMovement = player.GetComponent<Posicionador>();
+        if (playerMovement == null)
+        {
+            Debug.LogError("DoorController: No s'ha trobat un component 'Posicionador' en el jugador");
+        }
+
+        if (DoorManager.Instance != null)
+        {
+            // Registra la porta actual al DoorManager
+            DoorManager.Instance.RegisterDoor(this);
+
+        }
+        else
+        {
+            Debug.LogError("DoorController: DoorManager.Instance es null. Mira que DoorManager estigui a l'escena.");
+        }
 
         // Amaga canvas inicialment
-        worldSpaceCanvas.enabled = false;
+        // worldSpaceCanvas.enabled = false;
+    }
+
+    public void UpdateDoorVisuals() //al carregar escena cridar a aquesta funcio per pintar les portes segons l'estat
+    {
+        spriteRenderer.sprite = isDoorOpen ? openDoorSprite : closedDoorSprite;
+    }
+
+    public void UnlockDoor()
+    {
+        needs_key = false;
+        Debug.Log($"Porta {DoorID} desbloquejada.");
     }
 
     private void Update()
@@ -82,6 +122,7 @@ public class DoorController : MonoBehaviour
                 if (hit.collider != null && hit.collider.gameObject == gameObject)
                 {
                     // Canvi escena
+                    DoorManager.Instance.SaveDoorStates(); //salva l'estat de les portes
                     SceneManager.LoadScene(targetSceneName);
                 }
             }
@@ -133,7 +174,7 @@ public class DoorController : MonoBehaviour
     private IEnumerator HideMessageAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        worldSpaceCanvas.enabled = false; // Ocultar el Canvas
+        //worldSpaceCanvas.enabled = false; // Ocultar el Canvas
     }
 }
 

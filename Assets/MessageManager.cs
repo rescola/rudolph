@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class MessageManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class MessageManager : MonoBehaviour
     public Text messageText; // Referencia al text
     public Canvas canvas; // canvas compartit
     public float defaultDuration = 5f;
+
+    private Coroutine currentCoroutine;
 
     private void Awake()
     {
@@ -35,8 +38,36 @@ public class MessageManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Canvas o texto no están asignados.");
+            Debug.LogWarning("Canvas o text no estan asignats.");
         }
+    }
+
+    public void ShowMessageLines(string[] lines, float linePause)
+    {
+        if (canvas != null && messageText != null)
+        {
+            // Cancela cualsevol misatge previ
+            if (currentCoroutine != null)
+            {
+                StopCoroutine(currentCoroutine);
+                currentCoroutine = null;
+            }
+
+            canvas.enabled = true;
+            currentCoroutine = StartCoroutine(DisplayLines(lines, linePause));
+        }
+    }
+
+    private IEnumerator DisplayLines(string[] lines, float linePause)
+    {
+        foreach (string line in lines)
+        {
+            Debug.Log($"Mostra linia: {line}"); // Depuració per verificar l'ordre
+            messageText.text = line; // Mostra la linia actual
+            yield return new WaitForSeconds(linePause); // Pausa avans de la linia seguent
+        }
+
+        ClearMessage(); // Neteja el misatge després de mostrat totes les linies
     }
 
     private void ClearMessage()
@@ -46,5 +77,7 @@ public class MessageManager : MonoBehaviour
             messageText.text = "";
             canvas.enabled = false;
         }
+
+        currentCoroutine = null;
     }
 }

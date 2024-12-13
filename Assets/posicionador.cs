@@ -11,6 +11,7 @@ public class Posicionador : MonoBehaviour
     private DoorController currentDoor; // Referencia a la porta actual
 
     public float maxY; // Limit de les Y (això soluciona problemes si jugador marca una paret)
+    public float minY;
     public float distancia; //Distancia entre personatge y punt marcat
 
     public GameObject canvas;
@@ -25,20 +26,46 @@ public class Posicionador : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // Si apretem ESC tanca l'aplicació TODO canvas amb menu
             Application.Quit();
 
         }
         if (Input.GetMouseButtonDown(0))
         {
-            objetivo = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //Vector3 adjustedTarget;
+            //objetivo = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 clickedPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (clickedPosition.y < minY)
+            {
+                Debug.Log("Clic en la zona del inventari. Ignorat!.");
+                return; // Ignora clics en el área del inventario
+            }
+
+            objetivo = clickedPosition;
 
             if (objetivo.y > maxY)
             {
                 objetivo.y = maxY;
             }
 
+            if (objetivo.y < minY)
+            {
+                return; //no fa re si estem tocant inventari
+            }
+
             objetivo.z = 0; // Seguretat de les Z (ha de ser 0)
+
+            Vector3 adjustedTarget;
+            // Ajusta l'objectiu si està bloquejat
+            if (AdjustTargetIfBlocked(objetivo, out adjustedTarget))
+            {
+                objetivo = adjustedTarget;
+            }
+            else if (IsPathBlocked(objetivo))
+            {
+                Debug.Log("Cami bloquejat. No es mourà.");
+                objetivo = transform.position;
+                animator.SetBool("isMoving", false); // Es para
+            }
         }
 
         // Mou jugador cap al objectiu
@@ -109,5 +136,49 @@ public class Posicionador : MonoBehaviour
         Debug.Log("targetPosition final: " + objetivo);
         door = true;
         currentDoor = doorController; // Asigna la referencia de la porta
-    } 
+    }
+
+    private bool IsPathBlocked(Vector3 targetPosition)
+    {
+        float stopRadius = 0.2f; // Radi de parada
+
+        if (Vector3.Distance(transform.position, targetPosition) < stopRadius)
+        {
+            return true; // para dins el radi de parada
+        }
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Vector3.Distance(transform.position, targetPosition));
+        return hit.collider != null && hit.collider.CompareTag("Wall");
+
+        // Direcció del Raycast (cap al punt objectiu)
+        //Vector3 direction = (targetPosition - transform.position).normalized;
+
+        // Llença un Raycast des del personatge
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Vector3.Distance(transform.position, targetPosition));
+        //if (hit.collider != null && hit.collider.CompareTag("Wall")) // Comprova si el Raycast col·lisiona amb una paret
+        //{
+        //Debug.Log("Camino bloqueado por pared: " + hit.collider.name);
+        //return true; // El camí està bloquejat
+        //}
+
+        //return false; // El camí és lliure
+    }
+
+    private bool AdjustTargetIfBlocked(Vector3 targetPosition, out Vector3 adjustedPosition)
+    {
+        Vector3 direction = (targetPosition - transform.position).normalized;
+
+        // Realitza el Raycast i ajusta l'objetivo si es necesari
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Vector3.Distance(transform.position, targetPosition));
+        if (hit.collider != null && hit.collider.CompareTag("Wall"))
+        {
+            adjustedPosition = hit.point; // Ajusta l'objetivo al punt de colisió
+            return true;
+        }
+
+        adjustedPosition = targetPosition; // sense bloqueix
+        return false;
+    }
+
+
 }

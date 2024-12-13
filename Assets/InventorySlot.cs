@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour, IPointerClickHandler
 {
 
     public Image icon;
@@ -34,18 +35,28 @@ public class InventorySlot : MonoBehaviour
     }
 
     // Metode al fer click en l'slot
+    /*
     public void OnSlotClicked()
     {
         if (currentItem != null)
         {
-            Debug.Log($"Has seleccionado: {currentItem.name}");
-            // TODO: Aqui implementar que fer amb l'element seleccionat
+            if (Input.GetMouseButtonDown(1)) // Botón derecho
+            {
+                Debug.Log($"Usando el objeto: {currentItem.itemName}");
+                currentItem.UseItem();
+            }
+            else if (Input.GetMouseButtonDown(0)) // Botón izquierdo
+            {
+                Debug.Log($"Descripción del objeto: {currentItem.description}");
+                MessageManager.Instance.ShowMessage(currentItem.description, 3f);
+            }
         }
         else
         {
             Debug.Log("Este slot está vacío.");
         }
     }
+    */
 
     // Metode per veure si esta buit el slot
     public bool IsEmpty()
@@ -56,5 +67,25 @@ public class InventorySlot : MonoBehaviour
     public InventoryItem GetItem()
     {
         return currentItem; // Retorna l'objecte actual de l'slot
+    }
+    public void OnPointerClick(PointerEventData eventData) // segon intent, l'altre no funcionava
+    {
+        if (currentItem != null)
+        {
+            if (eventData.button == PointerEventData.InputButton.Right) // Clic dret
+            {
+                Debug.Log($"Utilitzant l'objecte: {currentItem.itemName}");
+                currentItem.UseItem();
+            }
+            else if (eventData.button == PointerEventData.InputButton.Left) // Clic esquerre
+            {
+                Debug.Log($"Descripció de l'objecte: {currentItem.description}");
+                MessageManager.Instance.ShowMessage(currentItem.description, 3f);
+            }
+        }
+        else
+        {
+            Debug.Log("Aquest slot està buit.");
+        }
     }
 }

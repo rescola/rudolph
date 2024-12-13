@@ -25,7 +25,7 @@ public class InteractableObject : MonoBehaviour
             InventoryManager.Instance.AddItemToInventory(itemToAdd); // posa l'intem a l'inventari
         }
 
-        
+
     }
 
 }
