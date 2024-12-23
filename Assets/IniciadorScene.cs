@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SceneInitializer : MonoBehaviour
 {
+    private static SceneInitializer instance;
+
     public string messageToDisplay;
 
     private void Start()
@@ -13,5 +15,18 @@ public class SceneInitializer : MonoBehaviour
     {
         Debug.Log(message); 
         // TODO Misatge per afegir
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

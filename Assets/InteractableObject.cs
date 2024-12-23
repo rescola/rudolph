@@ -19,6 +19,7 @@ public class InteractableObject : MonoBehaviour
         if (!string.IsNullOrEmpty(interactionMessage))
         {
             Debug.Log(interactionMessage); // Missatge del personatge
+            MessageManager.Instance.ShowMessage(interactionMessage, 3f);
         }
         if (itemToAdd != null)
         {
