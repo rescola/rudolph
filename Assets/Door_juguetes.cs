@@ -35,6 +35,7 @@ public class DoorController : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log($"[DoorController] Puerta {DoorID}: Estado inicial en el inspector: {isDoorOpen}");
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
         {
@@ -46,14 +47,25 @@ public class DoorController : MonoBehaviour
             Debug.LogError($"DoorController: No s'ha trobat un AudioSource en {gameObject.name}");
         }
 
-        if (isDoorOpen)
+        if (DoorManager.Instance != null)
         {
-            spriteRenderer.sprite = openDoorSprite;
+            DoorManager.Instance.RegisterDoor(this);
         }
         else
         {
-            spriteRenderer.sprite = closedDoorSprite;
+            Debug.LogError("[DoorController] DoorManager no està configurat a l'escena!");
         }
+        // Actualitzar visuals després del registre
+        UpdateDoorVisuals();
+
+        //if (isDoorOpen)
+        //{
+        //    spriteRenderer.sprite = openDoorSprite;
+        //}
+        //else
+        //{
+        //    spriteRenderer.sprite = closedDoorSprite;
+        //}
 
         player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
@@ -66,25 +78,46 @@ public class DoorController : MonoBehaviour
             Debug.LogError("DoorController: No s'ha trobat un component 'Posicionador' en el jugador");
         }
 
-        if (DoorManager.Instance != null)
-        {
-            // Registra la porta actual al DoorManager
-            DoorManager.Instance.RegisterDoor(this);
-
-        }
-        else
-        {
-            Debug.LogError("DoorController: DoorManager.Instance es null. Mira que DoorManager estigui a l'escena.");
-        }
-
         // Amaga canvas inicialment
         // worldSpaceCanvas.enabled = false;
     }
 
-    public void UpdateDoorVisuals() //al carregar escena cridar a aquesta funcio per pintar les portes segons l'estat
+    public void UpdateDoorVisuals()
     {
-        spriteRenderer.sprite = isDoorOpen ? openDoorSprite : closedDoorSprite;
+
+        if (spriteRenderer == null)
+        {
+            Debug.LogError($"[DoorController] Porta {DoorID}: SpriteRenderer no localitzada.");
+            return;
+        }
+
+        if (isDoorOpen)
+        {
+            if (openDoorSprite != null)
+            {
+                spriteRenderer.sprite = openDoorSprite;
+                Debug.Log($"[DoorController] Porta {DoorID}: Visual actualitzada a OBERTA.");
+            }
+            else
+            {
+                Debug.LogError($"[DoorController] Porta {DoorID}: Sprite per la porta oberta no asignada.");
+            }
+        }
+        else
+        {
+            if (closedDoorSprite != null)
+            {
+                spriteRenderer.sprite = closedDoorSprite;
+                Debug.Log($"[DoorController] Porta {DoorID}: Visual actualitzada a TANCADA.");
+            }
+            else
+            {
+                Debug.LogError($"[DoorController] Porta {DoorID}: Sprite per la porta tancada no asignada.");
+            }
+        }
     }
+
+
 
     public void UnlockDoor()
     {
@@ -129,34 +162,60 @@ public class DoorController : MonoBehaviour
         }
     }
 
-    public void ToggleDoor()
+    /*public void ToggleDoor()
     {
         if (!needs_key)
         {
             isDoorOpen = !isDoorOpen; // Canviar estat porta
 
-            if (isDoorOpen)
+            // Actualitza visuals i desa l'estat d'aquesta porta
+            UpdateDoorVisuals();
+            DoorManager.Instance.SaveDoorState(this);
+
+            // Mostra un missatge per depurar
+            Debug.Log($"[DoorController] Porta {DoorID}: Estat canviat a {isDoorOpen}");
+
+            // Reprodueix el so corresponent
+            PlaySound(isDoorOpen ? openDoorSound : closeDoorSound);
+
+            /*if (isDoorOpen)
             {
                 spriteRenderer.sprite = openDoorSprite;
+                // salvar estat
+                DoorManager.Instance.SaveDoorStates();
                 PlaySound(openDoorSound);
             }
             else
             {
                 spriteRenderer.sprite = closedDoorSprite;
+                // salvar estat
+                DoorManager.Instance.SaveDoorStates();
                 PlaySound(closeDoorSound);
-            }
+            }*//*
         }
         else
         {
             ShowMessage(keyNeededMessage);
         }
-    }
+    }*/
 
-    private void PlaySound(AudioClip clip)
+    public void ToggleDoor()
     {
-        if (clip != null && audioSource != null)
+        if (!needs_key)
         {
-            audioSource.PlayOneShot(clip);
+            isDoorOpen = !isDoorOpen;
+
+            // Actualizar visuales
+            UpdateDoorVisuals();
+
+            // Guardar el estado de la puerta
+            DoorManager.Instance.SaveDoorState(this);
+
+            Debug.Log($"[DoorController] Puerta {DoorID}: Estado cambiado a {(isDoorOpen ? "ABIERTO" : "CERRADO")} y guardado.");
+        }
+        else
+        {
+            ShowMessage(keyNeededMessage);
         }
     }
 
@@ -171,10 +230,5 @@ public class DoorController : MonoBehaviour
         MessageManager.Instance.ShowMessage(message, 4f);
     }
 
-    private IEnumerator HideMessageAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        //worldSpaceCanvas.enabled = false; // Ocultar el Canvas
-    }
 }
 

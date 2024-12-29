@@ -269,7 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closedDoorSprite: {fileID: 300386146, guid: 443fff58f85f643c69119ace64164c62, type: 3}
   openDoorSprite: {fileID: -1044428917, guid: 443fff58f85f643c69119ace64164c62, type: 3}
-  DoorID: 3
+  DoorID: 4
   openDoorSound: {fileID: 8300000, guid: e1269f3782f93498b9ac0c8c39f19fbf, type: 3}
   closeDoorSound: {fileID: 8300000, guid: e1269f3782f93498b9ac0c8c39f19fbf, type: 3}
   needs_key: 0
