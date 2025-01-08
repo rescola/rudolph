@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sala_juguetes.unity
     guid: bc94ea320d94146428670ec892c6414f
+  - enabled: 1
+    path: Assets/Scenes/Sala_santa.unity
+    guid: 0ec771e515d3343138e8853718b40b65
   m_configObjects: {}
