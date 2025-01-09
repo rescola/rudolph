@@ -32,10 +32,18 @@ public class DoorController : MonoBehaviour
 
     public string keyNeededMessage = "Necesito una llave";
     public string targetSceneName = ""; // Nom de l'escena a carregar
+    public Vector3 targetPlayerPosition; // Posició on apareixerà el jugador a l'escena de destinació
 
     private void Start()
     {
-        Debug.Log($"[DoorController] Puerta {DoorID}: Estado inicial en el inspector: {isDoorOpen}");
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerMovement = player.GetComponent<Posicionador>();
+
+        if (player == null || playerMovement == null)
+        {
+            Debug.LogError("DoorController: No s'ha trobat el jugador o el component Posicionador.");
+        }
+        Debug.Log($"[DoorController] Porta {DoorID}: Estat inicial en l'inspector: {isDoorOpen}");
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
         {
@@ -56,7 +64,7 @@ public class DoorController : MonoBehaviour
             Debug.LogError("[DoorController] DoorManager no està configurat a l'escena!");
         }
         // Actualitzar visuals després del registre
-        UpdateDoorVisuals();
+        //UpdateDoorVisuals();
 
         //if (isDoorOpen)
         //{
@@ -154,50 +162,18 @@ public class DoorController : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
                 if (hit.collider != null && hit.collider.gameObject == gameObject)
                 {
+                    // Guarda l'estat correcte abans de canviar d'escena
+                    DoorManager.Instance.SaveDoorState(this);
+                    // Passa la posició al gestor global
+                    PlayerPositionManager.targetPosition = targetPlayerPosition;
                     // Canvi escena
-                    DoorManager.Instance.SaveDoorStates(); //salva l'estat de les portes
+                    //DoorManager.Instance.SaveDoorStates(); //salva l'estat de les portes
+                    Debug.Log($"Canviant a l'escena {targetSceneName} amb posició objectiu {targetPlayerPosition}");
                     SceneManager.LoadScene(targetSceneName);
                 }
             }
         }
     }
-
-    /*public void ToggleDoor()
-    {
-        if (!needs_key)
-        {
-            isDoorOpen = !isDoorOpen; // Canviar estat porta
-
-            // Actualitza visuals i desa l'estat d'aquesta porta
-            UpdateDoorVisuals();
-            DoorManager.Instance.SaveDoorState(this);
-
-            // Mostra un missatge per depurar
-            Debug.Log($"[DoorController] Porta {DoorID}: Estat canviat a {isDoorOpen}");
-
-            // Reprodueix el so corresponent
-            PlaySound(isDoorOpen ? openDoorSound : closeDoorSound);
-
-            /*if (isDoorOpen)
-            {
-                spriteRenderer.sprite = openDoorSprite;
-                // salvar estat
-                DoorManager.Instance.SaveDoorStates();
-                PlaySound(openDoorSound);
-            }
-            else
-            {
-                spriteRenderer.sprite = closedDoorSprite;
-                // salvar estat
-                DoorManager.Instance.SaveDoorStates();
-                PlaySound(closeDoorSound);
-            }*//*
-        }
-        else
-        {
-            ShowMessage(keyNeededMessage);
-        }
-    }*/
 
     public void ToggleDoor()
     {
@@ -205,13 +181,13 @@ public class DoorController : MonoBehaviour
         {
             isDoorOpen = !isDoorOpen;
 
-            // Actualizar visuales
+            // Actualitzar visuals
             UpdateDoorVisuals();
 
-            // Guardar el estado de la puerta
+            // Guardar l'estat de la porta
             DoorManager.Instance.SaveDoorState(this);
 
-            Debug.Log($"[DoorController] Puerta {DoorID}: Estado cambiado a {(isDoorOpen ? "ABIERTO" : "CERRADO")} y guardado.");
+            Debug.Log($"[DoorController] Porta {DoorID}: Estat canviat a {(isDoorOpen ? "OBERT" : "TANCAT")} i guardat.");
         }
         else
         {
@@ -222,11 +198,6 @@ public class DoorController : MonoBehaviour
 
     private void ShowMessage(string message)
     {
-        //worldSpaceCanvas.enabled = true;
-        //messageText.text = message;
-
-        // Misatge desapareix despres de 4 segons
-        //StartCoroutine(HideMessageAfterDelay(4f));
         MessageManager.Instance.ShowMessage(message, 4f);
     }
 

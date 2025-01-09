@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Posicionador : MonoBehaviour
 {
@@ -8,36 +9,62 @@ public class Posicionador : MonoBehaviour
     private Vector3 objetivo;
     private Animator animator;
     private bool door = false;
-    private DoorController currentDoor; // Referencia a la porta actual
+    private DoorController currentDoor;
 
-    public float maxY; // Limit de les Y (això soluciona problemes si jugador marca una paret)
+    public float maxY;
     public float minY;
-    public float distancia; //Distancia entre personatge y punt marcat
-
+    public float distancia;
     public GameObject canvas;
 
-    void Start()
+    private void Awake()
+    {
+        // Subscripció a l'esdeveniment de canvi d'escena
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        // Cancel·la la subscripció a l'esdeveniment
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void Start()
     {
         objetivo = transform.position;
         animator = GetComponent<Animator>();
     }
 
-    void Update()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (PlayerPositionManager.targetPosition != Vector3.zero)
+        {
+            Debug.Log($"Reposicionant jugador a la nova escena a: {PlayerPositionManager.targetPosition}");
+            transform.position = PlayerPositionManager.targetPosition;
+            // Reinicia l'objectiu perque no camini
+            objetivo = transform.position;
+            //FixCanvasOrientation();
+            PlayerPositionManager.targetPosition = Vector3.zero; // Restableix la posició
+        }
+        else
+        {
+            Debug.Log("Cap posició objectiu trobada en carregar l'escena.");
+        }
+    }
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
-
         }
+
         if (Input.GetMouseButtonDown(0))
         {
-            //Vector3 adjustedTarget;
-            //objetivo = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 clickedPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (clickedPosition.y < minY)
             {
-                Debug.Log("Clic en la zona del inventari. Ignorat!.");
-                return; // Ignora clics en el área del inventario
+                Debug.Log("Clic en la zona del inventari. Ignorat.");
+                return;
             }
 
             objetivo = clickedPosition;
@@ -47,15 +74,9 @@ public class Posicionador : MonoBehaviour
                 objetivo.y = maxY;
             }
 
-            if (objetivo.y < minY)
-            {
-                return; //no fa re si estem tocant inventari
-            }
-
-            objetivo.z = 0; // Seguretat de les Z (ha de ser 0)
+            objetivo.z = 0;
 
             Vector3 adjustedTarget;
-            // Ajusta l'objectiu si està bloquejat
             if (AdjustTargetIfBlocked(objetivo, out adjustedTarget))
             {
                 objetivo = adjustedTarget;
@@ -64,67 +85,55 @@ public class Posicionador : MonoBehaviour
             {
                 Debug.Log("Cami bloquejat. No es mourà.");
                 objetivo = transform.position;
-                animator.SetBool("isMoving", false); // Es para
+                animator.SetBool("isMoving", false);
             }
         }
 
-        // Mou jugador cap al objectiu
         float distanciaAlObjeto = Vector3.Distance(transform.position, objetivo);
         if (distanciaAlObjeto > distancia)
         {
             transform.position = Vector3.MoveTowards(transform.position, objetivo, velocidad * Time.deltaTime);
             animator.SetBool("isMoving", true);
 
-            // Direcció del personatge
             if (objetivo.x > transform.position.x)
             {
                 FixCanvasOrientation();
-                transform.localScale = new Vector3(1, 1, 1); // Mou a la dreta
-                FixCanvasOrientation2();
+                transform.localScale = new Vector3(1, 1, 1);
             }
             else
             {
                 FixCanvasOrientation2();
-                transform.localScale = new Vector3(-1, 1, 1); // Mou a l'esquerra
-                FixCanvasOrientation();
-
+                transform.localScale = new Vector3(-1, 1, 1);
             }
-
         }
         else
         {
-            animator.SetBool("isMoving", false); // Es para
-            if (door == true && currentDoor != null)
+            animator.SetBool("isMoving", false);
+            if (door && currentDoor != null)
             {
-                currentDoor.ToggleDoor(); //Crida al metode per obrir/tancar la porta
-                door = false; // resetea l'estat
-                currentDoor = null; // reseteja la referencia
+                currentDoor.ToggleDoor();
+                door = false;
+                currentDoor = null;
             }
         }
     }
 
-    // Metode per asegurar que el canvas sempre miri a la dreta (es pugui llegir)
     void FixCanvasOrientation()
     {
-            canvas.transform.rotation = Quaternion.identity;
-
-            Vector3 canvasScale = canvas.transform.localScale;
-            canvasScale.x = -canvasScale.x;
-            canvas.transform.localScale = canvasScale;
-            //canvas.transform.localScale = new Vector3(-1, 1, 1);
+        canvas.transform.rotation = Quaternion.identity;
+        Vector3 canvasScale = canvas.transform.localScale;
+        canvasScale.x = -Mathf.Abs(canvasScale.x);
+        canvas.transform.localScale = canvasScale;
     }
 
     void FixCanvasOrientation2()
     {
         canvas.transform.rotation = Quaternion.identity;
-
         Vector3 canvasScale = canvas.transform.localScale;
         canvasScale.x = Mathf.Abs(canvasScale.x);
         canvas.transform.localScale = canvasScale;
-        //canvas.transform.localScale = new Vector3(-1, 1, 1);
     }
 
-    // Mètode públic per canviar l'objectiu de moviment (utilitzat en DoorController)
     public void SetTargetPosition(Vector3 newTarget, DoorController doorController)
     {
         objetivo = newTarget;
@@ -133,52 +142,42 @@ public class Posicionador : MonoBehaviour
             objetivo.y = maxY;
         }
         objetivo.z = 0;
-        Debug.Log("targetPosition final: " + objetivo);
+        Debug.Log($"targetPosition final: {objetivo}");
         door = true;
-        currentDoor = doorController; // Asigna la referencia de la porta
+        currentDoor = doorController;
     }
 
     private bool IsPathBlocked(Vector3 targetPosition)
     {
-        float stopRadius = 0.2f; // Radi de parada
+        float stopRadius = 0.2f;
 
         if (Vector3.Distance(transform.position, targetPosition) < stopRadius)
         {
-            return true; // para dins el radi de parada
+            return true;
         }
+
         Vector3 direction = (targetPosition - transform.position).normalized;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Vector3.Distance(transform.position, targetPosition));
         return hit.collider != null && hit.collider.CompareTag("Wall");
-
-        // Direcció del Raycast (cap al punt objectiu)
-        //Vector3 direction = (targetPosition - transform.position).normalized;
-
-        // Llença un Raycast des del personatge
-        //RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Vector3.Distance(transform.position, targetPosition));
-        //if (hit.collider != null && hit.collider.CompareTag("Wall")) // Comprova si el Raycast col·lisiona amb una paret
-        //{
-        //Debug.Log("Camino bloqueado por pared: " + hit.collider.name);
-        //return true; // El camí està bloquejat
-        //}
-
-        //return false; // El camí és lliure
     }
 
     private bool AdjustTargetIfBlocked(Vector3 targetPosition, out Vector3 adjustedPosition)
     {
         Vector3 direction = (targetPosition - transform.position).normalized;
 
-        // Realitza el Raycast i ajusta l'objetivo si es necesari
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Vector3.Distance(transform.position, targetPosition));
         if (hit.collider != null && hit.collider.CompareTag("Wall"))
         {
-            adjustedPosition = hit.point; // Ajusta l'objetivo al punt de colisió
+            adjustedPosition = hit.point;
             return true;
         }
 
-        adjustedPosition = targetPosition; // sense bloqueix
+        adjustedPosition = targetPosition;
         return false;
     }
+}
 
-
+public static class PlayerPositionManager
+{
+    public static Vector3 targetPosition = Vector3.zero;
 }

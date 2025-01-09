@@ -2542,6 +2542,7 @@ GameObject:
   - component: {fileID: 762009154}
   - component: {fileID: 762009153}
   - component: {fileID: 762009152}
+  - component: {fileID: 762009156}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -2632,6 +2633,18 @@ RectTransform:
   m_AnchoredPosition: {x: -0.008, y: 0.8161}
   m_SizeDelta: {x: 8.4946, y: 3.5856}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &762009156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762009151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d040e91da9840467792dfbaea003db41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &775777553
 GameObject:
   m_ObjectHideFlags: 0
@@ -5944,6 +5957,7 @@ MonoBehaviour:
   messageText: {fileID: 1988873515}
   keyNeededMessage: "Deber\xEDa leer la carta primero"
   targetSceneName: Distribuidor
+  targetPlayerPosition: {x: -0.863, y: -0.143, z: 0}
 --- !u!212 &1825252951
 SpriteRenderer:
   m_ObjectHideFlags: 0

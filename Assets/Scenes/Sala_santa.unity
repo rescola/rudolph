@@ -529,16 +529,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closedDoorSprite: {fileID: 300386146, guid: 443fff58f85f643c69119ace64164c62, type: 3}
   openDoorSprite: {fileID: -1044428917, guid: 443fff58f85f643c69119ace64164c62, type: 3}
-  DoorID: 5
+  DoorID: 3
   openDoorSound: {fileID: 8300000, guid: e1269f3782f93498b9ac0c8c39f19fbf, type: 3}
   closeDoorSound: {fileID: 8300000, guid: e1269f3782f93498b9ac0c8c39f19fbf, type: 3}
   needs_key: 0
-  isDoorOpen: 1
+  isDoorOpen: 0
   interactionDistance: 0.65
   worldSpaceCanvas: {fileID: 0}
   messageText: {fileID: 0}
   keyNeededMessage: Necesito una llave
   targetSceneName: Distribuidor
+  targetPlayerPosition: {x: 1.4, y: -0.105, z: 0}
 --- !u!61 &2039897851
 BoxCollider2D:
   m_ObjectHideFlags: 0
