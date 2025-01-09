@@ -188,6 +188,9 @@ public class DoorController : MonoBehaviour
             DoorManager.Instance.SaveDoorState(this);
 
             Debug.Log($"[DoorController] Porta {DoorID}: Estat canviat a {(isDoorOpen ? "OBERT" : "TANCAT")} i guardat.");
+
+            // Reprodueix el so corresponent
+            PlaySound(isDoorOpen ? openDoorSound : closeDoorSound);
         }
         else
         {
@@ -200,6 +203,19 @@ public class DoorController : MonoBehaviour
     {
         MessageManager.Instance.ShowMessage(message, 4f);
     }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
+        else if (clip == null)
+        {
+            Debug.LogWarning($"[DoorController] No s'ha assignat cap clip d'àudio per la porta {DoorID}");
+        }
+    }
+
 
 }
 
