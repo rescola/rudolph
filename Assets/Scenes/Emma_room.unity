@@ -5959,8 +5959,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b109e33afc1b4730b7fa29e292b5da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closedDoorSprite: {fileID: -1308852895, guid: 9f7d2e9a38ea44d1da36ab7980c521f3, type: 3}
-  openDoorSprite: {fileID: -440255742, guid: 9f7d2e9a38ea44d1da36ab7980c521f3, type: 3}
+  closedDoorSprite: {fileID: 950929797, guid: ab32e5aed7d8d4876ae3e03823fca9bc, type: 3}
+  openDoorSprite: {fileID: -1646275509, guid: ab32e5aed7d8d4876ae3e03823fca9bc, type: 3}
   DoorID: 1
   openDoorSound: {fileID: 8300000, guid: e1269f3782f93498b9ac0c8c39f19fbf, type: 3}
   closeDoorSound: {fileID: 8300000, guid: e1269f3782f93498b9ac0c8c39f19fbf, type: 3}
@@ -5971,7 +5971,7 @@ MonoBehaviour:
   messageText: {fileID: 1988873515}
   keyNeededMessage: "Deber\xEDa leer la carta primero"
   targetSceneName: Distribuidor
-  targetPlayerPosition: {x: -0.863, y: -0.143, z: 0}
+  targetPlayerPosition: {x: -2.162, y: -0.192, z: 0}
 --- !u!212 &1825252951
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6013,7 +6013,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1308852895, guid: 9f7d2e9a38ea44d1da36ab7980c521f3, type: 3}
+  m_Sprite: {fileID: 950929797, guid: ab32e5aed7d8d4876ae3e03823fca9bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
