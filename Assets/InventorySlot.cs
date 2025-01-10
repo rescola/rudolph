@@ -6,24 +6,66 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
 {
 
     public Image icon;
+    public Text countText; // Mostrar el comptador
 
     // Objecte actual a l'slot
     private InventoryItem currentItem;
+    private int count = 0; // Nombre d'elements al slot
 
     // Metode per agregar elements
-    public void AddItem(InventoryItem item)
+    public void AddItem(InventoryItem item, int amount = 1)
     {
-        if (item == null)
+        if (icon == null)
+        {
+            Debug.LogError($"El camp 'icon' del slot és NULL al InventorySlot del jocobjecte '{gameObject.name}'.");
+            return;
+        }
+        if (item == null) 
         {
             Debug.LogWarning("Intenta afegir un objecte nul al slot");
             return;
         }
-
-        currentItem = item;
-        icon.sprite = item.icon;
-        icon.color = Color.white; // Sembla que si no es negre no pinta
-        icon.enabled = true; // Mostrar l'icono
+        if (currentItem == item && item.isStackable)
+        {
+            count += amount;
+        }
+        else if (currentItem == null)
+        {
+            if (item.icon == null)
+            {
+                Debug.LogError($"L'objecte {item.itemName} no té una icona assignada.");
+                return;
+            }
+            currentItem = item;
+            icon.sprite = item.icon;
+            icon.enabled = true;
+            icon.color = Color.white; // Sembla que si no es negre no pinta
+            count = amount;
+            //UpdateUI();
+        }
     }
+
+    private void UpdateUI()
+    {
+        if (countText != null)
+        {
+            if (currentItem != null && currentItem.isStackable)
+            {
+                countText.text = count.ToString();
+                countText.enabled = true;
+            }
+            else
+            {
+                countText.text = "";
+                countText.enabled = false;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("countText no està assignat a l'Inspector.");
+        }
+    }
+
 
     // Metode per netejar l'slot (TODO)
     public void ClearSlot()
@@ -68,6 +110,12 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
     {
         return currentItem; // Retorna l'objecte actual de l'slot
     }
+
+    public int GetCount()
+    {
+        return count; // Retorna el nombre d'items d'aquest slot
+    }
+
     public void OnPointerClick(PointerEventData eventData) // segon intent, l'altre no funcionava
     {
         if (currentItem != null)
@@ -88,4 +136,19 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
             Debug.Log("Aquest slot està buit.");
         }
     }
+
+    public void RemoveAmount(int amount)
+    {
+        count -= amount;
+
+        if (count <= 0)
+        {
+            ClearSlot(); // Elimina l'element completament si el comptador arriba a 0
+        }
+        else
+        {
+            UpdateUI(); // Actualitza la UI si encara queden elements
+        }
+    }
+
 }

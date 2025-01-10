@@ -20,23 +20,38 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddItemToInventory(InventoryItem item)
+    public int GetItemCount(string itemName)
     {
-        // Mira si esta ja a l'inventari l'objecte
+        int totalCount = 0;
+
         foreach (InventorySlot slot in slots)
         {
-            if (!slot.IsEmpty() && slot.GetItem() == item) // compara amb l'existent
+            if (!slot.IsEmpty() && slot.GetItem().itemName == itemName)
             {
-                Debug.Log($"Ja no hi ha res més aquí");
+                totalCount += slot.GetCount(); // Suma el nombre d'items al comptador
+            }
+        }
+
+        return totalCount; // Retorna el total d'items trobats
+    }
+
+    public void AddItemToInventory(InventoryItem item, int amount = 1)
+    {
+        foreach (InventorySlot slot in slots)
+        {
+            if (!slot.IsEmpty() && slot.GetItem() == item && item.isStackable)
+            {
+                slot.AddItem(item, amount);
+                Debug.Log($"Afegit {amount} {item.itemName}(s).");
                 return;
             }
         }
-        // Itera slots per trobar un lliure
+
         foreach (InventorySlot slot in slots)
         {
             if (slot.IsEmpty())
             {
-                slot.AddItem(item); // Afageix a l'slot lliure
+                slot.AddItem(item, amount);
                 Debug.Log($"Item {item.itemName} afegit al inventari.");
                 return;
             }
@@ -44,4 +59,34 @@ public class InventoryManager : MonoBehaviour
 
         Debug.LogWarning("No hi ha espai a l'inventari!");
     }
+
+    public void RemoveItemFromInventory(string itemName, int amount)
+    {
+        foreach (InventorySlot slot in slots)
+        {
+            if (!slot.IsEmpty() && slot.GetItem().itemName == itemName)
+            {
+                int currentCount = slot.GetCount();
+
+                if (currentCount > amount)
+                {
+                    // Resta la quantitat especificada
+                    slot.RemoveAmount(amount);
+                    return;
+                }
+                else
+                {
+                    // Si la quantitat és igual o inferior, elimina completament l'objecte
+                    amount -= currentCount;
+                    slot.ClearSlot();
+                }
+
+                if (amount <= 0)
+                    return; // Ja hem eliminat totes les boles necessàries
+            }
+        }
+
+        Debug.LogWarning($"No s'han trobat suficients {itemName} a l'inventari per eliminar.");
+    }
+
 }
