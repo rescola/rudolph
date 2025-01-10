@@ -159,6 +159,7 @@ MonoBehaviour:
   objectName: Puerta
   itemToAdd: {fileID: 0}
   interactionMessage: 
+  emptyMessage: 
 --- !u!82 &390371503
 AudioSource:
   m_ObjectHideFlags: 0
@@ -509,7 +510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bolaItem: {fileID: 11400000, guid: e2cc55d7a0fb04e1fbb3ae2a13467f84, type: 2}
   keyItem: {fileID: 11400000, guid: a150ec2842c34404491908c3398f9d78, type: 2}
-  totalBolas: 12
+  totalBolas: 1
   successMessage: Vaya! Ja estan les boles a l'arbre! Ben fet, pren aquesta clau!
   progressMessage: Encara falten boles a l'arbre! Tens {0} de {1}.
   alreadyCompleteMessage: "L'arbre ja est\xE0 complet!"

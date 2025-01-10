@@ -157,6 +157,7 @@ MonoBehaviour:
   objectName: Cuadro
   itemToAdd: {fileID: 0}
   interactionMessage: Siempre me han gustado estos cuadros
+  emptyMessage: 
 --- !u!61 &68059906
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -537,6 +538,7 @@ MonoBehaviour:
   objectName: Reloj
   itemToAdd: {fileID: 11400000, guid: e2cc55d7a0fb04e1fbb3ae2a13467f84, type: 2}
   interactionMessage: Habia una bola dentro
+  emptyMessage: "No hay nada mas de inter\xE9s"
 --- !u!61 &677976269
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -791,7 +793,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1216298001}
   - component: {fileID: 1216298000}
-  - component: {fileID: 1216298002}
   m_Layer: 0
   m_Name: reloj
   m_TagString: Untagged
@@ -866,21 +867,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1216298002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216297999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cebb98bf7196b4d13bbf96e886db4433, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectName: Reloj
-  itemToAdd: {fileID: 0}
-  interactionMessage: Habia una bola dentro
 --- !u!1 &1357973266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,6 +1136,7 @@ MonoBehaviour:
   objectName: Puerta
   itemToAdd: {fileID: 0}
   interactionMessage: 
+  emptyMessage: 
 --- !u!1 &1993922908
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,6 +1173,7 @@ MonoBehaviour:
   objectName: Puerta
   itemToAdd: {fileID: 0}
   interactionMessage: 
+  emptyMessage: 
 --- !u!82 &1993922910
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1455,6 +1443,7 @@ MonoBehaviour:
   objectName: Puerta
   itemToAdd: {fileID: 0}
   interactionMessage: 
+  emptyMessage: 
 --- !u!82 &2115311543
 AudioSource:
   m_ObjectHideFlags: 0

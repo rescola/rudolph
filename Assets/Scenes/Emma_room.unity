@@ -471,6 +471,7 @@ MonoBehaviour:
   itemToAdd: {fileID: 0}
   interactionMessage: "\xBFPlantas carn\xEDvoras en el dormitorio? \xA1Nadie lo ver\xE1
     venir!"
+  emptyMessage: 
 --- !u!61 &114767473
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -765,6 +766,7 @@ MonoBehaviour:
   itemToAdd: {fileID: 0}
   interactionMessage: "Parece que alguien se llev\xF3 su contenido... O se fug\xF3
     solo."
+  emptyMessage: 
 --- !u!61 &145094293
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -911,6 +913,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: "'Recetas para brujas novatas\u2019. \xBFDeber\xEDa preocuparme?"
+  emptyMessage: 
 --- !u!61 &194096505
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1395,6 +1398,7 @@ MonoBehaviour:
   objectName: Cama
   itemToAdd: {fileID: 0}
   interactionMessage: La cama es testigo de mis mejores y peores ideas nocturnas.
+  emptyMessage: 
 --- !u!61 &459000758
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1668,6 +1672,7 @@ MonoBehaviour:
   objectName: Figura
   itemToAdd: {fileID: 0}
   interactionMessage: Una figura rota de papa noel
+  emptyMessage: 
 --- !u!61 &494581058
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2276,6 +2281,7 @@ MonoBehaviour:
   itemToAdd: {fileID: 0}
   interactionMessage: "Si abro esta ventana, \xBFentrar\xE1 la noche o escapar\xE1
     mi cordura?"
+  emptyMessage: 
 --- !u!61 &729962321
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2422,6 +2428,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: Parece que nadie lo ha abierto desde el siglo pasado
+  emptyMessage: 
 --- !u!61 &739201073
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2908,6 +2915,7 @@ MonoBehaviour:
   itemToAdd: {fileID: 0}
   interactionMessage: "Enciclopedia gal\xE1ctica, volumen 3... \xBFD\xF3nde estar\xE1n
     los otros 42?"
+  emptyMessage: 
 --- !u!61 &866008114
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3464,6 +3472,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: "Cre\xED haber prestado este... hace cinco a\xF1os"
+  emptyMessage: 
 --- !u!61 &1087851779
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3610,6 +3619,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: Unos libros de EGB
+  emptyMessage: 
 --- !u!61 &1155350122
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4166,6 +4176,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: Estos libros huelen a polvo y misterio
+  emptyMessage: 
 --- !u!61 &1326862363
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4312,6 +4323,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: "Otro tomo lleno de promesas de sabidur\xEDa olvidada"
+  emptyMessage: 
 --- !u!61 &1354122712
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4458,6 +4470,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: "Justo cuando pensaba que no pod\xEDa haber m\xE1s libros raros\u2026"
+  emptyMessage: 
 --- !u!61 &1373915953
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4899,6 +4912,7 @@ MonoBehaviour:
   itemToAdd: {fileID: 0}
   interactionMessage: "\xBFQui\xE9n dejar\xEDa aqu\xED 'El manual del perfecto alien?
     Interesante"
+  emptyMessage: 
 --- !u!61 &1447731364
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5556,6 +5570,7 @@ MonoBehaviour:
   objectName: "Jarr\xF3n"
   itemToAdd: {fileID: 0}
   interactionMessage: "Nada interesante aqu\xED dentro"
+  emptyMessage: 
 --- !u!61 &1654932018
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5851,6 +5866,7 @@ MonoBehaviour:
   objectName: Puerta
   itemToAdd: {fileID: 0}
   interactionMessage: 
+  emptyMessage: 
 --- !u!82 &1825252948
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6334,6 +6350,7 @@ MonoBehaviour:
   objectName: Planta
   itemToAdd: {fileID: 0}
   interactionMessage: "Veo que alguien se salt\xF3 el riego... \xA1otra vez!"
+  emptyMessage: 
 --- !u!61 &1932105535
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6818,6 +6835,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 11400000, guid: 776d1a7b74687477b8c976fb3ea02084, type: 2}
   interactionMessage: "Aqui est\xE1 la carta!"
+  emptyMessage: "Ya cog\xED la carta, solo quedan estos libros rojos"
 --- !u!1 &2131345213
 GameObject:
   m_ObjectHideFlags: 0
@@ -6999,6 +7017,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: "Aqu\xED dentro debe de haber m\xE1s polillas que letras."
+  emptyMessage: 
 --- !u!61 &2146922877
 BoxCollider2D:
   m_ObjectHideFlags: 0
