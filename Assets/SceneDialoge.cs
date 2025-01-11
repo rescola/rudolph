@@ -3,13 +3,15 @@ using UnityEngine.UI;
 
 public class SceneDialogue : MonoBehaviour
 {
-    public Text dialogueText; // Referencia al component de text a la UI
+    public Text dialogueText; // Text associat a aquest personatge
+    public Canvas dialogueCanvas; // Canvas associat a aquest personatge
     public string messageToDisplay;
-    public float displayDuration = 5f; // Duració del missatge a la pantalla
+    public float displayDuration = 5f;
 
     private void Start()
     {
-        MessageManager.Instance.ShowMessage(messageToDisplay, displayDuration);
+        // Envia el canvas i el text específics
+        MessageManager.Instance.ShowMessage(messageToDisplay, displayDuration, dialogueCanvas, dialogueText);
     }
 
     private void ShowMessage(string message)

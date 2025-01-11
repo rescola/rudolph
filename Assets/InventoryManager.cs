@@ -89,4 +89,17 @@ public class InventoryManager : MonoBehaviour
         Debug.LogWarning($"No s'han trobat suficients {itemName} a l'inventari per eliminar.");
     }
 
+    public bool HasItem(string itemName)
+    {
+        foreach (InventorySlot slot in slots)
+        {
+            if (!slot.IsEmpty() && slot.GetItem().itemName == itemName)
+            {
+                return true; // L'objecte està a l'inventari
+            }
+        }
+        return false; // No hi és
+    }
+
+
 }

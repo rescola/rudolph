@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75133265a96fa4438bdb961fe7dd71e1, type: 3}
   m_Name: llave_santa
   m_EditorClassIdentifier: 
-  itemName: Llave Santa
+  itemName: llave_santa
   icon: {fileID: 21300000, guid: 0aeda372333c248ce8b9c6f68ce91bfb, type: 3}
   description: Es la llave para abrir la puerta de Papa Noel
   isStackable: 0

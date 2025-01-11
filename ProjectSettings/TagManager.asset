@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Door
   - Wall
+  - santa
   layers:
   - Default
   - TransparentFX

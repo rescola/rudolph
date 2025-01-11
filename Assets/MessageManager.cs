@@ -6,9 +6,13 @@ public class MessageManager : MonoBehaviour
 {
     public static MessageManager Instance;
 
-    public Text messageText; // Referencia al text
-    public Canvas canvas; // canvas compartit
+    public Text defaultMessageText; // Text per defecte (jugador)
+    public Canvas defaultCanvas; // Canvas per defecte (jugador)
+    public Image defaultBackground; // Fons per defecte (opcional)
     public float defaultDuration = 5f;
+    private Canvas canvasToClear;
+    private Text textToClear;
+    private Image backgroundToClear;
 
     private Coroutine currentCoroutine;
 
@@ -17,67 +21,113 @@ public class MessageManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            Debug.Log("Instància del MessageManager creada.");
         }
         else
         {
+            Debug.LogWarning("S'ha intentat crear una segona instància del MessageManager.");
             Destroy(gameObject);
         }
     }
 
-    public void ShowMessage(string message, float duration = -1)
+    public void ShowMessage(string message, float duration = -1, Canvas targetCanvas = null, Text targetText = null, Image targetBackground = null)
     {
-        if (canvas != null && messageText != null)
-        {
-            canvas.enabled = true;
-            messageText.text = message;
+        Canvas canvasToUse = targetCanvas ?? defaultCanvas;
+        Text textToUse = targetText ?? defaultMessageText;
+        Image backgroundToUse = targetBackground ?? defaultBackground;
 
-            // Si no s'especifica la durada, agafa la predeterminada
+
+        if (canvasToUse != null && textToUse != null)
+        {
+            canvasToUse.enabled = true;
+            textToUse.text = message;
+
+            if (backgroundToUse != null)
+            {
+                backgroundToUse.color = new Color(0, 0, 0, 0.9f); // Negre gairebé opac
+            }
+
+            // Guarda els valors per a ClearMessage
+            canvasToClear = canvasToUse;
+            textToClear = textToUse;
+            backgroundToClear = backgroundToUse;
+
             float delay = (duration > 0) ? duration : defaultDuration;
-            CancelInvoke(); // Evita misatjes simultanis
-            Invoke("ClearMessage", delay);
+
+            CancelInvoke(nameof(ClearMessage));
+            Invoke(nameof(ClearMessage), delay);
         }
         else
         {
-            Debug.LogWarning("Canvas o text no estan asignats.");
+            Debug.LogWarning("Canvas o text no estan assignats.");
         }
     }
 
-    public void ShowMessageLines(string[] lines, float linePause)
+
+
+    private void ClearMessage()
     {
-        if (canvas != null && messageText != null)
+        ClearMessage(canvasToClear, textToClear, backgroundToClear);
+    }
+
+    private void ClearMessage(Canvas targetCanvas, Text targetText, Image targetBackground)
+    {
+        Debug.Log($"Netejant missatge del Canvas: {targetCanvas?.name}, Text: {targetText?.text}, Background: {targetBackground?.name}");
+
+        if (targetText != null)
         {
-            // Cancela cualsevol misatge previ
+            targetText.text = ""; // Buida el text
+        }
+
+        if (targetCanvas != null)
+        {
+            targetCanvas.enabled = false; // Desactiva el Canvas completament
+        }
+
+        if (targetBackground != null)
+        {
+            targetBackground.color = new Color(0, 0, 0, 0); // Fa transparent el fons
+        }
+    }
+
+
+    public void ShowMessageLines(string[] lines, float linePause, Canvas targetCanvas = null, Text targetText = null, Image targetBackground = null)
+    {
+        // Usa els valors per defecte si no es proporcionen
+        Canvas canvasToUse = targetCanvas ?? defaultCanvas;
+        Text textToUse = targetText ?? defaultMessageText;
+        Image backgroundToUse = targetBackground ?? defaultBackground;
+
+        if (canvasToUse != null && textToUse != null)
+        {
+            // Cancel·la qualsevol missatge previ
             if (currentCoroutine != null)
             {
                 StopCoroutine(currentCoroutine);
                 currentCoroutine = null;
             }
 
-            canvas.enabled = true;
-            currentCoroutine = StartCoroutine(DisplayLines(lines, linePause));
+            canvasToUse.enabled = true;
+
+            // Mostra el fons negre si està assignat
+            if (backgroundToUse != null)
+            {
+                backgroundToUse.color = new Color(0, 0, 0, 0.8f); // Negre semitransparent
+            }
+
+            currentCoroutine = StartCoroutine(DisplayLines(lines, linePause, canvasToUse, textToUse, backgroundToUse));
         }
     }
 
-    private IEnumerator DisplayLines(string[] lines, float linePause)
+    private IEnumerator DisplayLines(string[] lines, float linePause, Canvas targetCanvas, Text targetText, Image targetBackground)
     {
         foreach (string line in lines)
         {
-            Debug.Log($"Mostra linia: {line}"); // Depuració per verificar l'ordre
-            messageText.text = line; // Mostra la linia actual
-            yield return new WaitForSeconds(linePause); // Pausa avans de la linia seguent
+            Debug.Log($"Mostra línia: {line}");
+            targetText.text = line;
+            yield return new WaitForSeconds(linePause);
         }
 
-        ClearMessage(); // Neteja el misatge després de mostrat totes les linies
-    }
-
-    private void ClearMessage()
-    {
-        if (messageText != null)
-        {
-            messageText.text = "";
-            canvas.enabled = false;
-        }
-
-        currentCoroutine = null;
+        ClearMessage(targetCanvas, targetText, targetBackground); // Neteja el missatge després de mostrar totes les línies
     }
 }

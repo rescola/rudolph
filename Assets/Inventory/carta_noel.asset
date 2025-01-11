@@ -15,15 +15,13 @@ MonoBehaviour:
   itemName: carta_noel
   icon: {fileID: 21300000, guid: bdbcaf732abb54f46896168df28091a6, type: 3}
   description: Es una carta bien peculiar...
-  texto1: Querida Emma, soy Noel. Tu amor por los misterios me dice que eres perfecta
-    para resolver uno muy especial...
-  texto2: "Algo muy grave est\xE1 ocurriendo aqu\xED en el Polo Norte. La nariz de
-    Rudolf, mi fiel reno, ha dejado de brillar..."
-  texto3: "y sin luz no podr\xE9 guiar el trinero. Por si fuera poco, extra\xF1os
-    sucesos est\xE1n ocurriendo en mi taller..."
-  texto4: "No puedo confiar en nadie m\xE1s, pero s\xE9 que t\xFA, con tu curiosidad
-    e ingenio, eres perfecta para ayudarme."
-  texto5: "He incluido un poco de magia en esta carta para que al cruzar tu puerta
+  isStackable: 0
+  maxStack: 99
+  texto1: "He incluido un poco de magia en esta carta para que al cruzar tu puerta
     te traslade a mi casa. Recuerda que el espiritu de la navidad est\xE1 en tus
     manos."
+  texto2: 
+  texto3: 
+  texto4: 
+  texto5: 
   targetDoorID: 1
