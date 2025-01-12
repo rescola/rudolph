@@ -1398,7 +1398,7 @@ MonoBehaviour:
   interactionDistance: 0.65
   worldSpaceCanvas: {fileID: 0}
   messageText: {fileID: 0}
-  keyNeededMessage: Necesito una llave
+  keyNeededMessage: Esta cerrada, pero tiene un pomo curioso...
   targetSceneName: 
   targetPlayerPosition: {x: 0, y: 0, z: 0}
 --- !u!212 &1641534938
@@ -2173,7 +2173,7 @@ MonoBehaviour:
   interactionDistance: 0.65
   worldSpaceCanvas: {fileID: 0}
   messageText: {fileID: 0}
-  keyNeededMessage: Necesito una llave
+  keyNeededMessage: Tengo que ver a papa Noel antes de volver!
   targetSceneName: 
   targetPlayerPosition: {x: 0, y: 0, z: 0}
 --- !u!61 &2115311545

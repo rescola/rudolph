@@ -17,9 +17,9 @@ MonoBehaviour:
   description: Es una carta bien peculiar...
   isStackable: 0
   maxStack: 99
-  texto1: "He incluido un poco de magia en esta carta para que al cruzar tu puerta
-    te traslade a mi casa. Recuerda que el espiritu de la navidad est\xE1 en tus
-    manos."
+  texto1: Emma, soy Papa Noel. Algo grave esta pasando en mi casa, he incluido un
+    poco de magia en esta carta para que al cruzar tu puerta te traslade a mi casa.
+    Por favor, ayudame!
   texto2: 
   texto3: 
   texto4: 

@@ -472,7 +472,8 @@ MonoBehaviour:
   itemToAdd: {fileID: 0}
   interactionMessage: "\xBFPlantas carn\xEDvoras en el dormitorio? \xA1Nadie lo ver\xE1
     venir!"
-  emptyMessage: 
+  emptyMessage: "\xBFPlantas carn\xEDvoras en el dormitorio? \xA1Nadie lo ver\xE1
+    venir!"
   disappearOnCollect: 0
 --- !u!61 &114767473
 BoxCollider2D:
@@ -769,7 +770,7 @@ MonoBehaviour:
   itemToAdd: {fileID: 0}
   interactionMessage: "Parece que alguien se llev\xF3 su contenido... O se fug\xF3
     solo."
-  emptyMessage: 
+  emptyMessage: "Parece que alguien se llev\xF3 su contenido... O se fug\xF3 solo."
   disappearOnCollect: 0
 --- !u!61 &145094293
 BoxCollider2D:
@@ -918,7 +919,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: "'Recetas para brujas novatas\u2019. \xBFDeber\xEDa preocuparme?"
-  emptyMessage: 
+  emptyMessage: "'Recetas para brujas novatas\u2019. \xBFDeber\xEDa preocuparme?"
   disappearOnCollect: 0
 --- !u!61 &194096505
 BoxCollider2D:
@@ -1405,7 +1406,7 @@ MonoBehaviour:
   objectName: Cama
   itemToAdd: {fileID: 0}
   interactionMessage: La cama es testigo de mis mejores y peores ideas nocturnas.
-  emptyMessage: 
+  emptyMessage: La cama es testigo de mis mejores y peores ideas nocturnas.
   disappearOnCollect: 0
 --- !u!61 &459000758
 BoxCollider2D:
@@ -1681,7 +1682,7 @@ MonoBehaviour:
   objectName: Figura
   itemToAdd: {fileID: 0}
   interactionMessage: Una figura rota de papa noel
-  emptyMessage: 
+  emptyMessage: Una figura rota de papa noel
   disappearOnCollect: 0
 --- !u!61 &494581058
 BoxCollider2D:
@@ -2292,7 +2293,7 @@ MonoBehaviour:
   itemToAdd: {fileID: 0}
   interactionMessage: "Si abro esta ventana, \xBFentrar\xE1 la noche o escapar\xE1
     mi cordura?"
-  emptyMessage: 
+  emptyMessage: "Si abro esta ventana, \xBFentrar\xE1 la noche o escapar\xE1 mi cordura?"
   disappearOnCollect: 0
 --- !u!61 &729962321
 BoxCollider2D:
@@ -2441,7 +2442,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: Parece que nadie lo ha abierto desde el siglo pasado
-  emptyMessage: 
+  emptyMessage: Parece que nadie lo ha abierto desde el siglo pasado
   disappearOnCollect: 0
 --- !u!61 &739201073
 BoxCollider2D:
@@ -2932,7 +2933,8 @@ MonoBehaviour:
   itemToAdd: {fileID: 0}
   interactionMessage: "Enciclopedia gal\xE1ctica, volumen 3... \xBFD\xF3nde estar\xE1n
     los otros 42?"
-  emptyMessage: 
+  emptyMessage: "Enciclopedia gal\xE1ctica, volumen 3... \xBFD\xF3nde estar\xE1n
+    los otros 42?"
   disappearOnCollect: 0
 --- !u!61 &866008114
 BoxCollider2D:
@@ -3491,7 +3493,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: "Cre\xED haber prestado este... hace cinco a\xF1os"
-  emptyMessage: 
+  emptyMessage: "Cre\xED haber prestado este... hace cinco a\xF1os"
   disappearOnCollect: 0
 --- !u!61 &1087851779
 BoxCollider2D:
@@ -3640,7 +3642,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: Unos libros de EGB
-  emptyMessage: 
+  emptyMessage: Unos libros de EGB
   disappearOnCollect: 0
 --- !u!61 &1155350122
 BoxCollider2D:
@@ -3727,7 +3729,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.65882355, g: 0, b: 0.65882355, a: 0}
   m_FlipX: 0
@@ -4199,7 +4201,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: Estos libros huelen a polvo y misterio
-  emptyMessage: 
+  emptyMessage: Estos libros huelen a polvo y misterio
   disappearOnCollect: 0
 --- !u!61 &1326862363
 BoxCollider2D:
@@ -4348,7 +4350,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: "Otro tomo lleno de promesas de sabidur\xEDa olvidada"
-  emptyMessage: 
+  emptyMessage: "Otro tomo lleno de promesas de sabidur\xEDa olvidada"
   disappearOnCollect: 0
 --- !u!61 &1354122712
 BoxCollider2D:
@@ -4941,7 +4943,7 @@ MonoBehaviour:
   itemToAdd: {fileID: 0}
   interactionMessage: "\xBFQui\xE9n dejar\xEDa aqu\xED 'El manual del perfecto alien?
     Interesante"
-  emptyMessage: 
+  emptyMessage: "\xBFQui\xE9n dejar\xEDa aqu\xED 'El manual del perfecto alien? Interesante"
   disappearOnCollect: 0
 --- !u!61 &1447731364
 BoxCollider2D:
@@ -5601,7 +5603,7 @@ MonoBehaviour:
   objectName: "Jarr\xF3n"
   itemToAdd: {fileID: 0}
   interactionMessage: "Nada interesante aqu\xED dentro"
-  emptyMessage: 
+  emptyMessage: "Nada interesante aqu\xED dentro"
   disappearOnCollect: 0
 --- !u!61 &1654932018
 BoxCollider2D:
@@ -6385,7 +6387,7 @@ MonoBehaviour:
   objectName: Planta
   itemToAdd: {fileID: 0}
   interactionMessage: "Veo que alguien se salt\xF3 el riego... \xA1otra vez!"
-  emptyMessage: 
+  emptyMessage: "Veo que alguien se salt\xF3 el riego... \xA1otra vez!"
   disappearOnCollect: 0
 --- !u!61 &1932105535
 BoxCollider2D:
@@ -7056,7 +7058,7 @@ MonoBehaviour:
   objectName: Libros
   itemToAdd: {fileID: 0}
   interactionMessage: "Aqu\xED dentro debe de haber m\xE1s polillas que letras."
-  emptyMessage: 
+  emptyMessage: "Aqu\xED dentro debe de haber m\xE1s polillas que letras."
   disappearOnCollect: 0
 --- !u!61 &2146922877
 BoxCollider2D:

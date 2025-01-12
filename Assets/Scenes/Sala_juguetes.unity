@@ -768,6 +768,8 @@ GameObject:
   m_Component:
   - component: {fileID: 416381593}
   - component: {fileID: 416381592}
+  - component: {fileID: 416381595}
+  - component: {fileID: 416381594}
   m_Layer: 0
   m_Name: sierra
   m_TagString: Untagged
@@ -842,6 +844,69 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &416381594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416381591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cebb98bf7196b4d13bbf96e886db4433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectID: 
+  objectName: Sierras
+  itemToAdd: {fileID: 0}
+  interactionMessage: Mi padre me dice que no juegue con esas cosas
+  emptyMessage: Mi padre me dice que no juegue con esas cosas
+  disappearOnCollect: 0
+--- !u!61 &416381595
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416381591}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4.95, y: 1.91}
+    newSize: {x: 4.95, y: 1.91}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4.95, y: 1.91}
+  m_EdgeRadius: 0
 --- !u!1 &835315753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,6 +1066,8 @@ GameObject:
   m_Component:
   - component: {fileID: 880019827}
   - component: {fileID: 880019826}
+  - component: {fileID: 880019828}
+  - component: {fileID: 880019829}
   m_Layer: 0
   m_Name: herramientas
   m_TagString: Untagged
@@ -1075,6 +1142,69 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &880019828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880019825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cebb98bf7196b4d13bbf96e886db4433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectID: 
+  objectName: Herramientas
+  itemToAdd: {fileID: 0}
+  interactionMessage: "Cosas que nunca usar\xE9"
+  emptyMessage: "Cosas que nunca usar\xE9"
+  disappearOnCollect: 0
+--- !u!61 &880019829
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880019825}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.22, y: 4.51}
+    newSize: {x: 6.22, y: 4.51}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.22, y: 4.51}
+  m_EdgeRadius: 0
 --- !u!1 &944755281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,7 +1596,7 @@ GameObject:
   - component: {fileID: 1183435453}
   - component: {fileID: 1183435452}
   - component: {fileID: 1183435451}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Arbol_colinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1578,11 +1708,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1849852769
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.65882355, g: 0, b: 0.65882355, a: 0}
+  m_Color: {r: 0.05540227, g: 0.28249934, b: 0.7830189, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2029,6 +2159,7 @@ GameObject:
   - component: {fileID: 1813638466}
   - component: {fileID: 1813638465}
   - component: {fileID: 1813638467}
+  - component: {fileID: 1813638468}
   m_Layer: 0
   m_Name: duende
   m_TagString: Untagged
@@ -2149,6 +2280,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.56, y: 0.86}
   m_EdgeRadius: 0
+--- !u!114 &1813638468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813638464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cebb98bf7196b4d13bbf96e886db4433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectID: 
+  objectName: Elfo
+  itemToAdd: {fileID: 0}
+  interactionMessage: "\xBFTienes la llave de papa noel? claro que la quiero \xBFSi
+    te consigo las 7 bolas que te faltan me las daras? Voy a por ellas"
+  emptyMessage: "\xBFTienes la llave de papa noel? claro que la quiero \xBFSi te
+    consigo las 7 bolas que te faltan me las daras? Voy a por ellas"
+  disappearOnCollect: 0
 --- !u!1 &1876374818
 GameObject:
   m_ObjectHideFlags: 0

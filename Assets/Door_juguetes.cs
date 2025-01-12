@@ -177,55 +177,49 @@ public class DoorController : MonoBehaviour
 
     public void ToggleDoor()
     {
-        if (!needs_key)
+        if (needs_key)
         {
+            // Comprovar si el jugador té la clau
+            if (InventoryManager.Instance.HasItem("llave_santa"))
+            {
+                // Desbloquejar la porta i marcar-la com no necessitant clau
+                needs_key = false; // Ja no necessita clau
+                isDoorOpen = true; // Obrir la porta
+                DoorManager.Instance.SaveDoorState(this); // Guardar l'estat
+
+                // Mostra el missatge només quan es desbloqueja amb la clau
+                MessageManager.Instance.ShowMessage("La llave encaja!", 3f);
+
+                // Reprodueix el so d'obertura
+                PlaySound(openDoorSound);
+
+                // Actualitzar visuals
+                UpdateDoorVisuals();
+            }
+            else
+            {
+                // Si no té clau, mostra el missatge d'error
+                ShowMessage(keyNeededMessage);
+            }
+        }
+        else
+        {
+            // Si no necessita clau, alterna l'estat normal de la porta
             isDoorOpen = !isDoorOpen;
 
             // Actualitzar visuals
             UpdateDoorVisuals();
 
-            // Guardar l'estat de la porta
+            // Guardar l'estat actualitzat
             DoorManager.Instance.SaveDoorState(this);
-
-            Debug.Log($"[DoorController] Porta {DoorID}: Estat canviat a {(isDoorOpen ? "OBERT" : "TANCAT")} i guardat.");
 
             // Reprodueix el so corresponent
             PlaySound(isDoorOpen ? openDoorSound : closeDoorSound);
-        }
-        else
-        {
-            // Si la porta necessita clau, comprovar si el jugador té l'objecte necessari
-            InventoryManager inventoryManager = InventoryManager.Instance;
-            if (inventoryManager != null && inventoryManager.HasItem("llave_santa"))
-            {
-                // Desbloquejar la porta
-                needs_key = false;
-                isDoorOpen = true;
 
-                // Treure la clau de l'inventari
-                inventoryManager.RemoveItemFromInventory("llave_santa", 1);
-
-                // Mostrar missatge d'èxit
-                ShowMessage("¡La puerta se ha abierto!");
-
-                // Actualitzar visuals
-                UpdateDoorVisuals();
-
-                // Guardar l'estat de la porta
-                DoorManager.Instance.SaveDoorState(this);
-
-                Debug.Log($"[DoorController] Porta {DoorID} desbloquejada i oberta.");
-
-                // Reprodueix el so d'obertura
-                PlaySound(openDoorSound);
-            }
-            else
-            {
-                // Si no té la clau, mostrar el missatge necessari
-                ShowMessage(keyNeededMessage);
-            }
+            Debug.Log($"[DoorController] Porta {DoorID}: Estat canviat a {(isDoorOpen ? "OBERT" : "TANCAT")}.");
         }
     }
+
 
 
 
